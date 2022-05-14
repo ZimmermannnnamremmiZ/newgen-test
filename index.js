@@ -35,9 +35,17 @@ function filterPrice (courses, ranges) {
       if (minPrice === null && maxPrice === null) return course;
 
       return minPrice === null    // если минимальная цена в фильтре не указана
+
+            // то выводим курсы ценой до максимальной цены в фильтре включительно
              ? maxPrice >= course.prices[1] && course.prices[1] !== null
-             : maxPrice === null  // если максимальная цена в фильтре не указана
+
+             // если максимальная цена в фильтре не указана
+             : maxPrice === null
+
+             // то выводим курсы ценой от минимальной цены в фильтре включительно
              ? minPrice <= course.prices[0]
+
+             // иначе выводим курсы в пределах фильтра
              : minPrice <= course.prices[0] && maxPrice >= course.prices[1] && course.prices[1] !== null
   })
 }
